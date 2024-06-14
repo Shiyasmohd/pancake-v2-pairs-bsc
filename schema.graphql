@@ -1,0 +1,20 @@
+type PancakeFactory @entity {
+  id: Bytes!
+  totalPairs: BigInt!
+}
+
+type Token @entity(immutable: true) {
+  id: Bytes!
+  name: String!
+  symbol: String!
+  decimals: BigInt!
+}
+
+type Pair @entity(immutable: true) {
+  id: Bytes!
+  name: String!
+  token0: Token!
+  token1: Token!
+  block: BigInt!
+  timestamp: BigInt!
+}

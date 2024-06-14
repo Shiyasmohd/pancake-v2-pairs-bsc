@@ -1,0 +1,43 @@
+specVersion: 1.2.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: PancakeFactory
+    network: bsc
+    source:
+      address: "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"
+      abi: PancakeFactory
+      startBlock: 6809737
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - PairCreated
+      abis:
+        - name: PancakeFactory
+          file: ./abis/PancakeFactory.json
+        - name: PancakeFactory
+          file: ./abis/PancakeFactory.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20NameBytes
+          file: ./abis/ERC20NameBytes.json
+        - name: ERC20SymbolBytes
+          file: ./abis/ERC20SymbolBytes.json
+        - name: Pair
+          file: ./abis/Pair.json
+      eventHandlers:
+        - event: PairCreated(indexed address,indexed address,address,uint256)
+          handler: handlePairCreated
+          calls:
+            ERC20.getName0: ERC20[event.params.token0].name()
+            ERC20.getSymbol0: ERC20[event.params.token0].symbol()
+            ERC20.getDecimals0: ERC20[event.params.token0].decimals()
+            ERC20.getName1: ERC20[event.params.token1].name()
+            ERC20.getSymbol1: ERC20[event.params.token1].symbol()
+            ERC20.getDecimals1: ERC20[event.params.token1].decimals()
+      file: ./src/pancake-factory.ts
