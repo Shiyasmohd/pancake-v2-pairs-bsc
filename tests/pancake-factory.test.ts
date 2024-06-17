@@ -7,8 +7,6 @@ import {
   afterAll
 } from "matchstick-as/assembly/index"
 import { Address, BigInt } from "@graphprotocol/graph-ts"
-import { PairCreated } from "../generated/schema"
-import { PairCreated as PairCreatedEvent } from "../generated/PancakeFactory/PancakeFactory"
 import { handlePairCreated } from "../src/pancake-factory"
 import { createPairCreatedEvent } from "./pancake-factory-utils"
 

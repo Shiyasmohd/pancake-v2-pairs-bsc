@@ -3,6 +3,11 @@ indexerHints:
   prune: auto
 schema:
   file: ./schema.graphql
+features:
+  - grafting
+graft:
+  base: QmePcrgbPJv2VBgUXv8QS6uvu1SWWtCwKUzcrKEwQssTm5
+  block: 28431788
 dataSources:
   - kind: ethereum
     name: PancakeFactory
@@ -10,7 +15,7 @@ dataSources:
     source:
       address: "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"
       abi: PancakeFactory
-      startBlock: 6809737
+      startBlock: 28431789
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

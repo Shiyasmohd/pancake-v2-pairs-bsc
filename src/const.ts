@@ -1,4 +1,4 @@
-import { Address, BigInt } from "@graphprotocol/graph-ts";
+import { Address, BigInt, log } from "@graphprotocol/graph-ts";
 import { ERC20 } from "../generated/PancakeFactory/ERC20"
 import { ERC20SymbolBytes } from "../generated/PancakeFactory/ERC20SymbolBytes"
 import { ERC20NameBytes } from "../generated/PancakeFactory/ERC20NameBytes"
@@ -50,9 +50,12 @@ export function fetchTokenName(tokenAddress: Address): string {
 export function fetchTokenDecimals(tokenAddress: Address): BigInt {
     let contract = ERC20.bind(tokenAddress);
     let decimalValue = BigInt.fromI32(0); // Initialize with 0
+    log.info("Fetching decimals for token: {}", [tokenAddress.toHexString()]);
     let decimalResult = contract.try_decimals();
+    log.info("Fetched result", [decimalResult.reverted.toString()]);
+    log.info("Fetched result", [decimalResult.value.toString()]);
     if (!decimalResult.reverted) {
-        decimalValue = BigInt.fromI32(decimalResult.value); // Directly assign the value
+        decimalValue = BigInt.fromString(decimalResult.value.toString()); // Directly assign the value
     }
     return decimalValue;
 }

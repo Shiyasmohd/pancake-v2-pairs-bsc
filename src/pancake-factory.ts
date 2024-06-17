@@ -1,9 +1,10 @@
 import { Address, BigInt, Bytes } from "@graphprotocol/graph-ts"
 import { PairCreated as PairCreatedEvent } from "../generated/PancakeFactory/PancakeFactory"
-import { Pair, PairCreated, PancakeFactory, Token } from "../generated/schema"
+import { Pair, PancakeFactory, Token } from "../generated/schema"
 import { FACTORY_ADDRESS, fetchTokenDecimals, fetchTokenName, fetchTokenSymbol } from "./const";
 
 export function handlePairCreated(event: PairCreatedEvent): void {
+
   let factory = PancakeFactory.load(Bytes.fromHexString(FACTORY_ADDRESS));
   if (factory === null) {
     factory = new PancakeFactory(Bytes.fromHexString(FACTORY_ADDRESS));
